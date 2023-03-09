@@ -229,11 +229,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/run/media/kenth/Shared Memory/Backup/Documents/Universidad/7/DESARROLLO DE SOFTWARE AVANZADO/TAREAS/Grupal/4/Backend/Backend.csproj",
-      "projectName": "Backend",
-      "projectPath": "/run/media/kenth/Shared Memory/Backup/Documents/Universidad/7/DESARROLLO DE SOFTWARE AVANZADO/TAREAS/Grupal/4/Backend/Backend.csproj",
+      "projectUniqueName": "/run/media/kenth/Shared Memory/Backup/Documents/Universidad/7/DESARROLLO DE SOFTWARE AVANZADO/TAREAS/Grupal/4/GameStore/GameStore.csproj",
+      "projectName": "GameStore",
+      "projectPath": "/run/media/kenth/Shared Memory/Backup/Documents/Universidad/7/DESARROLLO DE SOFTWARE AVANZADO/TAREAS/Grupal/4/GameStore/GameStore.csproj",
       "packagesPath": "/home/kenth/.nuget/packages/",
-      "outputPath": "/run/media/kenth/Shared Memory/Backup/Documents/Universidad/7/DESARROLLO DE SOFTWARE AVANZADO/TAREAS/Grupal/4/Backend/obj/",
+      "outputPath": "/run/media/kenth/Shared Memory/Backup/Documents/Universidad/7/DESARROLLO DE SOFTWARE AVANZADO/TAREAS/Grupal/4/GameStore/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/kenth/.nuget/NuGet/NuGet.Config"
