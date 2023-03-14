@@ -43,5 +43,20 @@ namespace App.Controllers
                 return new BadRequestResult();
             }
         }
+
+        [HttpPost("delete")]
+        public async Task<ActionResult<string>> DeleteFromCart(
+            [FromBody] DeleteFromCartDto deleteFromCartDto
+        )
+        {
+            try
+            {
+                return await _cartService.deleteFromCart(deleteFromCartDto);
+            }
+            catch (Exception)
+            {
+                return new BadRequestResult();
+            }
+        }
     }
 }

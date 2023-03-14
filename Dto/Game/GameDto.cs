@@ -7,7 +7,7 @@ namespace App.Dto.Game
         public string? description { get; set; }
         public string? cover { get; set; }
         public decimal? price { get; set; }
-        public DateTime releaseDate { get; set; }
+        public DateTime? releaseDate { get; set; }
         public bool isActive { get; set; }
         public int stars { get; set; }
         public List<string>? tags { get; set; }

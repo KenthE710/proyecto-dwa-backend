@@ -21,11 +21,10 @@ namespace App.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost]
-        [Route("login")]
-        public async Task<ActionResult> login([FromBody] LoginDto loginDto)
+        [HttpPost("login")]
+        public async Task<ActionResult> login([FromBody] AuthDto authDto)
         {
-            User? user = await _auth.Validate(loginDto);
+            User? user = await _auth.Validate(authDto);
 
             if (user == null)
             {
@@ -37,6 +36,12 @@ namespace App.Controllers
             {
                 return Ok(JsonConvert.SerializeObject(createToken(user!)));
             }
+        }
+
+        [HttpPost("Signin")]
+        public async Task<ActionResult<string>> signin([FromBody] AuthDto authDto)
+        {
+            return await _auth.Signin(authDto);
         }
 
         private string createToken(User user)

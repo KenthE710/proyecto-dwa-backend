@@ -2,6 +2,7 @@ using System.Data;
 using System.Xml.Linq;
 using App.DBMagnament;
 using App.Dto.Game;
+using Newtonsoft.Json;
 
 namespace App.Services.GameService
 {
@@ -62,9 +63,18 @@ namespace App.Services.GameService
 
                     foreach (DataRow row in rows)
                     {
-                        tags.Add(row["tag"].ToString()!);
-                        versions.Add(row["version"].ToString()!);
-                        platforms.Add(row["platform"].ToString()!);
+                        if (!row.IsNull("tag"))
+                        {
+                            tags.Add(row["tag"].ToString()!);
+                        }
+                        if (!row.IsNull("version"))
+                        {
+                            versions.Add(row["version"].ToString()!);
+                        }
+                        if (!row.IsNull("platform"))
+                        {
+                            platforms.Add(row["platform"].ToString()!);
+                        }
                     }
 
                     return new GameDto
@@ -74,7 +84,9 @@ namespace App.Services.GameService
                         description = firstRow["description"].ToString(),
                         cover = firstRow["cover"].ToString(),
                         price = Convert.ToInt32(firstRow["price"]),
-                        releaseDate = DateTime.Parse(firstRow["release_date"].ToString()!),
+                        releaseDate = firstRow.IsNull("release_date")
+                            ? null
+                            : DateTime.Parse(firstRow["release_date"].ToString()!),
                         isActive = Convert.ToBoolean(firstRow["is_active"]),
                         stars = Convert.ToInt32(firstRow["stars"]),
                         tags = tags.Distinct().ToList(),

@@ -69,5 +69,17 @@ namespace App.Services.CartService
 
             return "ok";
         }
+
+        public async Task<string> deleteFromCart(DeleteFromCartDto deleteFromCartDto)
+        {
+            XDocument? xmlParam = DBXmlMethods.GetXml(deleteFromCartDto);
+            DataSet dsResultado = await DBXmlMethods.EjecutaBase(
+                "SetCart",
+                "DELETE_FROM_CART",
+                xmlParam?.ToString()
+            );
+
+            return "ok";
+        }
     }
 }

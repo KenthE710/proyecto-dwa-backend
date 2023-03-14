@@ -1,10 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Xml.Linq;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using Newtonsoft.Json;
 using App.Models;
 using App.Dto.Auth;
 using App.DBMagnament;
@@ -13,9 +8,9 @@ namespace App.Services.AuthService
 {
     public class AuthService : IAuthService
     {
-        public async Task<User?> Validate(LoginDto loginDto)
+        public async Task<User?> Validate(AuthDto authDto)
         {
-            XDocument? xmlParam = DBXmlMethods.GetXml(loginDto);
+            XDocument? xmlParam = DBXmlMethods.GetXml(authDto);
             DataSet dsResultado = await DBXmlMethods.EjecutaBase(
                 "Auth",
                 "VALIDATE",
@@ -34,6 +29,18 @@ namespace App.Services.AuthService
             }
 
             return null;
+        }
+
+        public async Task<string> Signin(AuthDto authDto)
+        {
+            XDocument? xmlParam = DBXmlMethods.GetXml(authDto);
+            DataSet dsResultado = await DBXmlMethods.EjecutaBase(
+                "Auth",
+                "SIGNIN",
+                xmlParam?.ToString()
+            );
+
+            return "ok";
         }
     }
 }

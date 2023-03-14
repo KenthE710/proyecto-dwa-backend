@@ -16,5 +16,11 @@ namespace App.Services.CartService
         ///</summary>
         ///<param name="addToCartDto">Dto con los datos para añadir al carrito</param>
         public Task<string> addToCart(AddToCartDto addToCartDto);
+
+        ///<summary>
+        /// Elimina un Juego del carrito de compras
+        ///</summary>
+        ///<param name="deleteFromCartDto">Dto con los datos para eliminar el juego del carrito</param>
+        public Task<string> deleteFromCart(DeleteFromCartDto deleteFromCartDto);
     }
 }
