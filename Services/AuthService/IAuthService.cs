@@ -1,4 +1,3 @@
-using App.Models;
 using App.Dto.Auth;
 
 namespace App.Services.AuthService
@@ -13,7 +12,7 @@ namespace App.Services.AuthService
         /// Retorna al usuario validado.
         /// Si las credenciales son incorrectas retorna null
         /// </returns>
-        public Task<User?> Validate(AuthDto authDto);
+        public Task<UserDto?> Validate(AuthDto authDto);
 
         public Task<string> Signin(AuthDto authDto);
     }

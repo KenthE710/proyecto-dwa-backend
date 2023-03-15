@@ -31,12 +31,27 @@ namespace App.Controllers
             }
         }
 
+        [HttpPost("info")]
+        public async Task<ActionResult<CartInfo>> GetCartInfo([FromBody] GetCartDto getCartDto)
+        {
+            CartInfo? cart = await _cartService.getCartInfo(getCartDto);
+            if (cart == null)
+            {
+                return NotFound(new { error = "No se encontro el carrito" });
+            }
+            else
+            {
+                return cart;
+            }
+        }
+
         [HttpPost("add")]
-        public async Task<ActionResult<string>> AddToCart([FromBody] AddToCartDto addToCartDto)
+        public async Task<ActionResult> AddToCart([FromBody] AddToCartDto addToCartDto)
         {
             try
             {
-                return await _cartService.addToCart(addToCartDto);
+                var res = await _cartService.addToCart(addToCartDto);
+                return new JsonResult(new { Respuesta = res });
             }
             catch (Exception)
             {
@@ -51,7 +66,22 @@ namespace App.Controllers
         {
             try
             {
-                return await _cartService.deleteFromCart(deleteFromCartDto);
+                var res = await _cartService.deleteFromCart(deleteFromCartDto);
+                return new JsonResult(new { Respuesta = res });
+            }
+            catch (Exception)
+            {
+                return new BadRequestResult();
+            }
+        }
+
+        [HttpPost("clean")]
+        public async Task<ActionResult<string>> DeleteFromCart([FromBody] CleanCartDto cleanCartDto)
+        {
+            try
+            {
+                var res = await _cartService.cleanCart(cleanCartDto);
+                return new JsonResult(new { Respuesta = res });
             }
             catch (Exception)
             {

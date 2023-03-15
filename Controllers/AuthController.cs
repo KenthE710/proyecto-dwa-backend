@@ -2,10 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using Newtonsoft.Json;
 using App.Services.AuthService;
 using App.Dto.Auth;
-using App.Models;
 
 namespace App.Controllers
 {
@@ -22,9 +20,9 @@ namespace App.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> login([FromBody] AuthDto authDto)
+        public async Task<ActionResult<LoginDto>> login([FromBody] AuthDto authDto)
         {
-            User? user = await _auth.Validate(authDto);
+            UserDto? user = await _auth.Validate(authDto);
 
             if (user == null)
             {
@@ -34,17 +32,28 @@ namespace App.Controllers
             }
             else
             {
-                return Ok(JsonConvert.SerializeObject(createToken(user!)));
+                return new LoginDto { user = user, token = createToken(user!) };
             }
         }
 
-        [HttpPost("Signin")]
-        public async Task<ActionResult<string>> signin([FromBody] AuthDto authDto)
+        [HttpPost("signin")]
+        public async Task<ActionResult> signin([FromBody] AuthDto authDto)
         {
-            return await _auth.Signin(authDto);
+            try
+            {
+                var res = await _auth.Signin(authDto);
+
+                return new JsonResult(new { Respuesta = "ok" });
+            }
+            catch (System.Exception)
+            {
+                return BadRequest(
+                    new { Leyenda = "Error en las credenciales", Respuesta = "Error" }
+                );
+            }
         }
 
-        private string createToken(User user)
+        private string createToken(UserDto user)
         {
             var claims = new List<Claim>
             {

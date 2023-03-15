@@ -2,7 +2,6 @@ using System.Data;
 using System.Xml.Linq;
 using App.DBMagnament;
 using App.Dto.Game;
-using Newtonsoft.Json;
 
 namespace App.Services.GameService
 {
