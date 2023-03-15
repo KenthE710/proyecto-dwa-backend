@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7281:80"
+    depends_on:
+      - db
+    networks:
+      - nw_game_store
+
+  db:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    ports:
+      - "1434:1433"
+    environment:
+      SA_PASSWORD: "app@GameStore"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - "db_game_store:/var/opt/mssql"
+    networks:
+      - nw_game_store
+
+volumes:
+  db_game_store:
+
+networks:
+  nw_game_store:
